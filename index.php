@@ -1,7 +1,7 @@
 <?php
 // PHP部分: フォームのデータを処理
 header("Location: /index.html");
-exit();
+// exit();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$name = htmlspecialchars($_POST['name']);
