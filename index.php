@@ -1,6 +1,6 @@
 <?php
 // PHP部分: フォームのデータを処理
-header("Location: /index.html");
+// header("Location: /index.html");
 // exit();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
