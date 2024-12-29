@@ -3,8 +3,10 @@
 // header("Location: /index.html");
 // exit();
 
+// 特別な変数がPOSTであれば変数nameに代入
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$name = htmlspecialchars($_POST['name']);
+	// 以下を表示する
 	echo "<!DOCTYPE html>
     <html lang='en'>
     <head>
