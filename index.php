@@ -1,7 +1,7 @@
 <?php
 // PHP部分: フォームのデータを処理
-// header("Location: /index.html");
-// exit();
+header("Location: /index.html");
+exit();
 
 // 特別な変数がPOSTであれば変数nameに代入
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
