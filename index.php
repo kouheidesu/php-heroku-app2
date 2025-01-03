@@ -1,7 +1,9 @@
+
+
 <?php
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 	header("Location: /index.html");
-	exit();
+	// exit();
 }
 
 $name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : 'Guest';
