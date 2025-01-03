@@ -8,23 +8,23 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : 'Guest';
 
-try {
-	// データベース接続情報
-	$dsn = 'mysql:host=localhost;dbname=testdb;charset=utf8mb4';
-	$username = 'root';
-	$password = 'password';
+// try {
+// 	// データベース接続情報
+// 	$dsn = 'mysql:host=localhost;dbname=testdb;charset=utf8mb4';
+// 	$username = 'root';
+// 	$password = 'password';
 
-	// PDOインスタンスを作成
-	$pdo = new PDO($dsn, $username, $password);
+// 	// PDOインスタンスを作成
+// 	$pdo = new PDO($dsn, $username, $password);
 
-	// エラーモードを例外に設定
-	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+// 	// エラーモードを例外に設定
+// 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	// データベース操作を追加する場合はここに記述
-} catch (PDOException $e) {
-	echo "接続エラー: " . $e->getMessage();
-	exit(); // エラーが発生した場合は処理を終了
-}
+// 	// データベース操作を追加する場合はここに記述
+// } catch (PDOException $e) {
+// 	echo "接続エラー: " . $e->getMessage();
+// 	exit(); // エラーが発生した場合は処理を終了
+// }
 
 echo "<!DOCTYPE html>
 <html lang='en'>
