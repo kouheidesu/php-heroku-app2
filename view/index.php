@@ -19,5 +19,18 @@
         <p id="message" class="hidden">Thank you for submitting the form!</p>
         <button id="toggleMessageButton">Toggle Message</button>
     </div>
+    <h1>Herokuでメッセージを保存</h1>
+    <form method="POST">
+        <label for="message">メッセージ:</label>
+        <input type="text" name="message" id="message" required>
+        <button type="submit">送信</button>
+    </form>
+
+    <h2>保存されたメッセージ一覧</h2>
+    <ul>
+        <?php foreach ($messages as $msg): ?>
+            <li><?= htmlspecialchars($msg['message']) ?> (<?= $msg['created_at'] ?>)</li>
+        <?php endforeach; ?>
+    </ul>
 </body>
 </html>
