@@ -2,7 +2,7 @@
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-	header("Location: view/home.php");
+	header("Location: /view/home.php");
 	exit();
 }
 
