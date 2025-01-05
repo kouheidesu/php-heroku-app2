@@ -1,31 +1,31 @@
-<?php
-// データベース接続とメッセージ取得処理
-try {
-    // データベース接続情報
-    $dsn = 'mysql:host=localhost;dbname=testdb;charset=utf8mb4';
-    $username = 'root'; // Herokuの場合、環境変数から取得する必要あり
-    $password = 'password';
+<!-- <?php
+        // データベース接続とメッセージ取得処理
+        try {
+            // データベース接続情報
+            $dsn = 'mysql:host=localhost;dbname=testdb;charset=utf8mb4';
+            $username = 'root'; // Herokuの場合、環境変数から取得する必要あり
+            $password = 'password';
 
-    // PDOインスタンスを作成
-    $pdo = new PDO($dsn, $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // PDOインスタンスを作成
+            $pdo = new PDO($dsn, $username, $password);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // フォームが送信された場合の処理
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
-        $message = htmlspecialchars($_POST['message']);
-        $stmt = $pdo->prepare("INSERT INTO messages (message) VALUES (:message)");
-        $stmt->execute([':message' => $message]);
-        header("Location: index.php");
-        exit();
-    }
+            // フォームが送信された場合の処理
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['message'])) {
+                $message = htmlspecialchars($_POST['message']);
+                $stmt = $pdo->prepare("INSERT INTO messages (message) VALUES (:message)");
+                $stmt->execute([':message' => $message]);
+                header("Location: index.php");
+                exit();
+            }
 
-    // メッセージを取得
-    $stmt = $pdo->query("SELECT * FROM messages ORDER BY created_at DESC");
-    $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
-} catch (PDOException $e) {
-    die("データベース接続エラー: " . $e->getMessage());
-}
-?>
+            // メッセージを取得
+            $stmt = $pdo->query("SELECT * FROM messages ORDER BY created_at DESC");
+            $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            die("データベース接続エラー: " . $e->getMessage());
+        }
+        ?> -->
 
 
 <!DOCTYPE html>
