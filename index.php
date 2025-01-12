@@ -7,9 +7,10 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // データベース接続情報
-$dsn = 'pgsql:host=your-host;port=5432;dbname=your-database';
-$user = 'root';
-$password = 'gyarmex';
+$dsn = getenv('DB_DSN');
+$user = getenv('DB_USER');
+$password = getenv('DB_PASSWORD');
+
 
 try {
     // データベースへの接続
