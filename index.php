@@ -2,29 +2,45 @@
 
 <?php
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-	header("Location: /view/home.php");
-	exit();
+    header("Location: /view/home.php");
+    exit();
+}
+
+// データベース接続情報
+$dsn = 'pgsql:host=your-host;port=5432;dbname=your-database';
+$user = 'root';
+$password = 'gyarmex';
+
+try {
+    // データベースへの接続
+    $pdo = new PDO($dsn, $user, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+    // SQL文を実行（テーブルの作成）
+    $createTableSQL = "
+        CREATE TABLE IF NOT EXISTS users (
+            id SERIAL PRIMARY KEY,
+            name VARCHAR(100),
+            email VARCHAR(100)
+        );
+    ";
+    $pdo->exec($createTableSQL);
+
+    // SQL文を実行（データの挿入）
+    $insertSQL = "
+        INSERT INTO users (name, email)
+        VALUES ('John Doe', 'john@example.com');
+    ";
+    $pdo->exec($insertSQL);
+
+    echo "テーブルとデータの作成が完了しました。";
+} catch (PDOException $e) {
+    echo "エラー: " . $e->getMessage();
 }
 
 $name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : 'Guest';
 
-// try {
-// 	// データベース接続情報
-// 	$dsn = 'mysql:host=localhost;dbname=testdb;charset=utf8mb4';
-// 	$username = 'root';
-// 	$password = 'password';
 
-// 	// PDOインスタンスを作成
-// 	$pdo = new PDO($dsn, $username, $password);
-
-// 	// エラーモードを例外に設定
-// 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-// 	// データベース操作を追加する場合はここに記述
-// } catch (PDOException $e) {
-// 	echo "接続エラー: " . $e->getMessage();
-// 	exit(); // エラーが発生した場合は処理を終了
-// }
 
 echo "<!DOCTYPE html>
 <html lang='en'>
