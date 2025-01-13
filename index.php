@@ -1,6 +1,7 @@
 
 
 <?php
+// POSTでなければhome.phpに遷移
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: /view/home.php");
     exit();
@@ -10,7 +11,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $dsn = getenv('DB_DSN');
 $user = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
-
 
 try {
     // データベースへの接続
