@@ -6,37 +6,41 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: /view/home.php");
     exit();
 }
-
+// データベースいん接続した際の処理が必要？
 // データベース接続情報
 $dsn = getenv('DB_DSN');
 $user = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
 
-try {
-    // データベースへの接続
-    $pdo = new PDO($dsn, $user, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    try {
+        // データベースへの接続
+        $pdo = new PDO($dsn, $user, $password);
+        $pdo->setAttribute(
+            PDO::ATTR_ERRMODE,
+            PDO::ERRMODE_EXCEPTION
+        );
 
-    // SQL文を実行（テーブルの作成）
-    $createTableSQL = "
+        // SQL文を実行（テーブルの作成）
+        $createTableSQL = "
         CREATE TABLE IF NOT EXISTS users (
             id SERIAL PRIMARY KEY,
             name VARCHAR(100),
             email VARCHAR(100)
         );
     ";
-    $pdo->exec($createTableSQL);
+        $pdo->exec($createTableSQL);
 
-    // SQL文を実行（データの挿入）
-    $insertSQL = "
+        // SQL文を実行（データの挿入）
+        $insertSQL = "
         INSERT INTO users (name, email)
         VALUES ('John Doe', 'john@example.com');
-    ";
-    $pdo->exec($insertSQL);
-
-    echo "テーブルとデータの作成が完了しました。";
-} catch (PDOException $e) {
-    echo "エラー: " . $e->getMessage();
+        ";
+        $pdo->exec($insertSQL);
+        echo "テーブルとデータの作成が完了しました。";
+    } catch (PDOException $e) {
+        echo "エラー: " . $e->getMessage();
+    }
 }
 
 $name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : 'Guest';
