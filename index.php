@@ -37,6 +37,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         VALUES ('John Doe', 'john@example.com');
         ";
         $pdo->exec($insertSQL);
+
+        // ここに入力フォーム内容をテーブルに保存するコード記述必要
+        $insertSQL = "
+        INSERT INTO users ()
+        ";
+        $pdo->exec($insertSQL);
+
+
+
         echo "テーブルとデータの作成が完了しました。";
     } catch (PDOException $e) {
         echo "エラー: " . $e->getMessage();

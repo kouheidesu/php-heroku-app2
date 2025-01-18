@@ -11,7 +11,7 @@
 
 <body>
     <!-- 最初のフォーム -->
-    <div class="container">
+    <!-- <div class="container">
         <form action="index.php" method="post">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
@@ -19,7 +19,7 @@
         </form>
         <p id="message" class="hidden">Thank you for submitting the form!</p>
         <button id="toggleMessageButton">Toggle Message</button>
-    </div>
+    </div> -->
 
     <!-- メッセージ保存フォーム -->
     <h1>Herokuでメッセージを保存</h1>
@@ -32,8 +32,11 @@
     <!-- 保存されたメッセージ一覧 -->
     <h2>保存されたメッセージ一覧</h2>
     <ul>
+        <!-- $messagesが空でなければ -->
         <?php if (!empty($messages)): ?>
+            <!-- $messagesを$msgとして繰り返す -->
             <?php foreach ($messages as $msg): ?>
+
                 <li><?= htmlspecialchars($msg['message']) ?> (<?= htmlspecialchars($msg['created_at']) ?>)</li>
             <?php endforeach; ?>
         <?php else: ?>
