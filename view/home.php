@@ -11,7 +11,7 @@
 
 <body>
     <!-- 最初のフォーム -->
-    <!-- <div class="container">
+    <div class="container">
         <form action="index.php" method="post">
             <label for="name">Name:</label>
             <input type="text" id="name" name="name" required>
@@ -19,7 +19,7 @@
         </form>
         <p id="message" class="hidden">Thank you for submitting the form!</p>
         <button id="toggleMessageButton">Toggle Message</button>
-    </div> -->
+    </div>
 
     <!-- メッセージ保存フォーム -->
     <h1>Herokuでメッセージを保存</h1>
