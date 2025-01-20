@@ -20,6 +20,7 @@
         // 'message' フィールドのデータを取得
         $newMessage = $_POST['message'] ?? null;
 
+
         if ($newMessage) {
             // メッセージと作成日時を保存
             $messages[] = [
@@ -29,18 +30,6 @@
         }
     }
     ?>
-
-    <!-- 最初のフォーム -->
-    <!-- submitボタン押下でindex.phpに送信される -->
-    <div class="container">
-        <form action="index.php" method="post">
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            <button type="submit">Submit</button>
-        </form>
-        <p id="message" class="hidden">Thank you for submitting the form!</p>
-        <button id="toggleMessageButton">Toggle Message</button>
-    </div>
 
     <!-- メッセージ保存フォーム -->
     <h1>Herokuでメッセージを保存</h1>

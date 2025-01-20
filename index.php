@@ -12,59 +12,35 @@ $dsn = getenv('DB_DSN');
 $user = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
 
+try {
+    $pdo = new PDO($dsn, $user, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die('データベース接続失敗: ' . $e->getMessage());
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    try {
-        // データベースへの接続
-        $pdo = new PDO($dsn, $user, $password);
-        $pdo->setAttribute(
-            PDO::ATTR_ERRMODE,
-            PDO::ERRMODE_EXCEPTION
-        );
+    $newMessage = $_POST['message'] ?? null;
 
-        // SQL文を実行（テーブルの作成）
-        $createTableSQL = "
-        CREATE TABLE IF NOT EXISTS users (
-            id SERIAL PRIMARY KEY,
-            name VARCHAR(100),
-            email VARCHAR(100)
-        );
-    ";
-        $pdo->exec($createTableSQL);
-
-        // SQL文を実行（データの挿入）
-        $insertSQL = "
-        INSERT INTO users (name, email)
-        VALUES ('John Doe', 'john@example.com');
-        ";
-        $pdo->exec($insertSQL);
-
-        // ここに入力フォーム内容をテーブルに保存するコード記述必要
-        $insertSQL = "
-        INSERT INTO users ()
-        ";
-        $pdo->exec($insertSQL);
-
-
-
-        echo "テーブルとデータの作成が完了しました。";
-    } catch (PDOException $e) {
-        echo "エラー: " . $e->getMessage();
+    if ($newMessage) {
+        try {
+            $stmt = $pdo->prepare('INSERT INTO messages (message, created_at) VALUES (:message, :created_at)');
+            $stmt->execute([
+                ':message' => htmlspecialchars($newMessage),
+                ':created_at' => date('Y-m-d H:i:s'),
+            ]);
+        } catch (PDOException $e) {
+            die('メッセージの保存に失敗しました: ' . $e->getMessage());
+        }
     }
 }
 
-$name = isset($_POST['name']) ? htmlspecialchars($_POST['name']) : 'Guest';
+$messages = [];
+try {
+    $stmt = $pdo->query('SELECT * FROM messages ORDER BY created_at DESC');
+    $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    die('メッセージの取得に失敗しました: ' . $e->getMessage());
+}
+?>
 
-
-
-echo "<!DOCTYPE html>
-<html lang='en'>
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Form Submission</title>
-</head>
-<body>
-    <h1>Hello, " . $name . "!</h1>
-    <a href='index.html'>Go Back</a>
-</body>
-</html>";
