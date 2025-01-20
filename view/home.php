@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- phpに関して、入力フォーム内容を表示するにあたって2つのコードが混じっている気がする -->
 
 <head>
     <meta charset="UTF-8">
@@ -10,7 +11,27 @@
 </head>
 
 <body>
+    <?php
+    // メッセージを保存するための配列（通常はデータベースを使用）
+    $messages = [];
+
+    // フォームが送信されたかどうかを確認
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // 'message' フィールドのデータを取得
+        $newMessage = $_POST['message'] ?? null;
+
+        if ($newMessage) {
+            // メッセージと作成日時を保存
+            $messages[] = [
+                'message' => htmlspecialchars($newMessage),
+                'created_at' => date('Y-m-d H:i:s'),
+            ];
+        }
+    }
+    ?>
+
     <!-- 最初のフォーム -->
+    <!-- submitボタン押下でindex.phpに送信される -->
     <div class="container">
         <form action="index.php" method="post">
             <label for="name">Name:</label>
