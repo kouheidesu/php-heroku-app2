@@ -1,3 +1,4 @@
+<!-- INSERTOしたカラムは存在するのだろうか？ -->
 
 
 <?php
@@ -12,6 +13,7 @@ $dsn = getenv('DB_DSN');
 $user = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
 
+// インスタンス作成しエラーの場合エラー分表示
 try {
     $pdo = new PDO($dsn, $user, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -19,11 +21,13 @@ try {
     die('データベース接続失敗: ' . $e->getMessage());
 }
 
+// REQUEST_METHODがPOSTだったら処理
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newMessage = $_POST['message'] ?? null;
 
     if ($newMessage) {
         try {
+            // $stmt変数にsqlを挿入
             $stmt = $pdo->prepare('INSERT INTO messages (message, created_at) VALUES (:message, :created_at)');
             $stmt->execute([
                 ':message' => htmlspecialchars($newMessage),
@@ -35,6 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+// クエリ結果を$messages配列に格納
 $messages = [];
 try {
     $stmt = $pdo->query('SELECT * FROM messages ORDER BY created_at DESC');
@@ -43,4 +48,3 @@ try {
     die('メッセージの取得に失敗しました: ' . $e->getMessage());
 }
 ?>
-
