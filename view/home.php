@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Example</title>
-    <link rel="stylesheet" href="index.css">
-    <script src="index.js" defer></script>
+    <link rel="stylesheet" href="../index.css">
+    <script src="../index.js" defer></script>
 </head>
 
 <body>
     <!-- メッセージ保存フォーム -->
     <h1>Herokuでメッセージを保存</h1>
-    <form action="index.php" method="POST">
+    <form action="../index.php" method="POST">
         <label for="message">メッセージ:</label>
         <input type="text" name="message" id="message" required>
         <button type="submit">送信</button>

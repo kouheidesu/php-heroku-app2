@@ -7,7 +7,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: /view/home.php");
     exit();
 }
-// データベースに接続した際の処理が必要？
+
+// ここから下の処理がされていない？
 // データベース接続情報
 $dsn = getenv('DB_DSN');
 $user = getenv('DB_USER');
