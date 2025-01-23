@@ -18,14 +18,16 @@
         <button type="submit">送信</button>
     </form>
 
+    <!-- これなんのコード？ -->
     <!-- // another_file.php -->
     <?php
     include '/view/home.php'; // または require 'messages.php';
 
-    // $messages を利用
-    foreach ($messages as $message) {
-        echo "メッセージ: " . $message['message'] . " 日時: " . $message['created_at'] . "<br>";
-    }
+    // // $messages を利用
+    // foreach ($messages as $message) {
+    //     echo "メッセージ: " . $message['message'] . " 日時: " . $message['created_at'] . "<br>";
+    // }
+    // 
     ?>
 
 

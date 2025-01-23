@@ -28,6 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($newMessage) {
         try {
             // $stmt変数にsqlを挿入
+            // messageとcreated_atを作成
             $stmt = $pdo->prepare('INSERT INTO messages (message, created_at) VALUES (:message, :created_at)');
             $stmt->execute([
                 ':message' => htmlspecialchars($newMessage),
@@ -40,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // クエリ結果を$messages配列に格納
+// $messagesをhome.phpに持っていければok?
 $messages = [];
 try {
     $stmt = $pdo->query('SELECT * FROM messages ORDER BY created_at DESC');
