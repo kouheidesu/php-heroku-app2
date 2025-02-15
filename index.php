@@ -1,9 +1,11 @@
-<!-- INSERTOしたカラムは存在するのだろうか？ -->
-
-
 <?php
+// ob_start(); // 出力バッファリングを開始
+// session_start();
+
+$method = $_SERVER['REQUEST_METHOD'] ?? 'UNKNOWN';
+
 // POSTでなければhome.phpに遷移
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+if ($method !== 'POST') {
     header("Location: /view/home.php");
     exit();
 }
@@ -13,7 +15,6 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $dsn = getenv('DB_DSN');
 $user = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
-
 // インスタンス作成しエラーの場合エラー分表示
 try {
     $pdo = new PDO($dsn, $user, $password);
@@ -50,4 +51,15 @@ try {
 } catch (PDOException $e) {
     die('メッセージの取得に失敗しました: ' . $e->getMessage());
 }
-?>
+
+
+
+$sample;
+$list;
+$listRecord;
+$movie;
+$space;
+$opinion;
+$information;
+$output;
+$pull;
