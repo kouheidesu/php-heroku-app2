@@ -1,3 +1,6 @@
+<?php
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Form Example</title>
-    <!-- <link rel="stylesheet" href="../index.css"> -->
+    <link rel="stylesheet" href="../index.css">
     <script src="../index.js" defer></script>
 </head>
 
@@ -17,18 +20,6 @@
         <input type="text" name="message" id="message" required>
         <button type="submit">送信</button>
     </form>
-
-    <!-- これなんのコード？ -->
-    <!-- // another_file.php -->
-    <?php
-    include '/view/home.php'; // または require 'messages.php';
-
-    // // $messages を利用
-    // foreach ($messages as $message) {
-    //     echo "メッセージ: " . $message['message'] . " 日時: " . $message['created_at'] . "<br>";
-    // }
-    // 
-    ?>
 
 
     <!-- 保存されたメッセージ一覧 -->
